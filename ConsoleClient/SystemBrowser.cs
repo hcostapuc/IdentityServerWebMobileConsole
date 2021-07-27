@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
-using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +20,7 @@ namespace ConsoleClientWithBrowser
         {
             _path = path;
 
-                Port = 56778;
+            Port = 56778;
         }
 
         public async Task<BrowserResult> InvokeAsync(BrowserOptions options)

@@ -1,24 +1,11 @@
-using IdentityModel;
-using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api
 {
@@ -42,37 +29,14 @@ namespace Api
             //somente para debug
             IdentityModelEventSource.ShowPII = true;
 
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            //services.AddAuthentication(o =>
-            //{
-            //    o.DefaultScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            //    o.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-            //})
-            //    .AddIdentityServerAuthentication(options =>
-            //    {
-            //        //options.Authority = "https://localhost:5001";
-            //        //options.RequireHttpsMetadata = false;
-            //        //options.ApiSecret = "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0";
-            //        //options.ApiName = "MobileClient";
-            //        //options.RoleClaimType = JwtClaimTypes.Role;
-            //        //options.NameClaimType = JwtClaimTypes.Name;
-            //        options.RequireHttpsMetadata = false;
-            //        options.Authority = "https://localhost:5001";
-            //        options.ApiName = "m2m.client";
-            //        options.ApiSecret = "511536EF-F270-4058-80CA-1C89C192F69A";
-            //    });
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            .AddJwtBearer(options =>
            {
-                // base-address of your identityserver
-                options.Authority = "https://localhost:5001";
+               // base-address of your identityserver
+               options.Authority = "https://localhost:5001";
 
-                // if you are using API resources, you can specify the name here
-                options.Audience = "https://localhost:5001/resources";
-
-                // IdentityServer emits a typ header by default, recommended extra check
-                //options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
+               // if you are using API resources, you can specify the name here
+               options.Audience = "https://localhost:5001/resources";
            });
         }
 
